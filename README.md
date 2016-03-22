@@ -4,7 +4,7 @@ A weather station with GPRS connection that logs data in a open source platform 
 
 ## Motivation
 
-The project will be used to monitor weather variables in rural areas where there is no internet connection.
+The project will be used to monitor weather variables in rural areas with no or limited internet connection.
 
 ## Installation
 
