@@ -1,6 +1,6 @@
 ## Synopsis
 
-A weather station with GPRS connection that logs data in a open source platform such as ThingSpeak.
+A weather station using Arduino with GPRS connection that logs data in a open source platform such as ThingSpeak.
 
 ## Motivation
 
