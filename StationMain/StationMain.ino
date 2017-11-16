@@ -5,6 +5,8 @@
 #define DHTTYPE DHT11
 
 DHT dht(DHTPIN, DHTTYPE);
+
+/* Global Variables */
 Statistic statTemp;
 Statistic statHum;
 int count = 1;
@@ -17,32 +19,42 @@ void setup() {
 }
 
 void loop() {
-  float h = dht.readHumidity();
-  float t = dht.readTemperature();
   // int heat_index = dht.computeHeatIndex(t, h, false);
 
-  statTemp.add(t);
-  statHum.add(h);
+  statTemp.add(getTemperature());
+  statHum.add(getHumidity());
 
-  if (statTemp.count() == 10)  {
-   Serial.print("Count: ");
-   Serial.print(count++);
-    
-   Serial.print("  Temp. AVG: ");
-   Serial.print(statTemp.average(), 1);
-
-   Serial.print("  Humid. AVG: ");
-   Serial.print(statHum.average(), 1);
-
-   Serial.print("  Heat index: ");
-   Serial.print(dht.computeHeatIndex(statTemp.average(), statHum.average(), false), 1);
-
-   Serial.println();
-    
-   statTemp.clear();
-   statHum.clear();
-  }
+  displayResults();
 
   delay(1000);
+}
+
+float getHumidity(){
+  return dht.readHumidity();
+}
+
+float getTemperature(){
+  return dht.readTemperature();
+}
+
+void displayResults(){
+   if (statTemp.count() == 5)  {
+     Serial.print("Count: ");
+     Serial.print(count++);
+      
+     Serial.print("  Temp. AVG: ");
+     Serial.print(statTemp.average(), 1);
+  
+     Serial.print("  Humid. AVG: ");
+     Serial.print(statHum.average(), 1);
+  
+     Serial.print("  Heat index: ");
+     Serial.print(dht.computeHeatIndex(statTemp.average(), statHum.average(), false), 1);
+  
+     Serial.println();
+      
+     statTemp.clear();
+     statHum.clear();
+  }
 }
 
